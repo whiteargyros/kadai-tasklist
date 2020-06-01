@@ -1,32 +1,13 @@
 <% if logged_in? %>
-  <div class="row">
-    <aside class="col-sm-4">
-      <%= form_with(model: @task, local: true) do |f| %>
-        <div class="form-group">
-          <%= f.label :content, 'Task' %>
-          <%= f.text_area :content, class: 'form-control', rows: 5 %>
-        </div>
-        <div class="form-group">
-          <%= f.label :status, 'Status' %>
-          <%= f.text_area :status, class: 'form-control', rows: 5 %>
-        </div>
-        <%= f.submit 'Post', class: 'btn btn-primary btn-block' %>
-      <% end %>
-    </aside>
-
-    <div class="col-sm-8">
-      <%= render 'tasks/tasks', tasks: @tasks %>
-    </div>
-    
-    <%= link_to 'Logout', logout_path, method: :delete %>
-        
-  </div>
+  <h3>PostTask</h3>
+  <%= render 'tasks/form', task: @task %>
+  <h3>MyTasklist</h3>
+  <%= render 'tasks/tasks', tasks: @tasks %>
+  <h3>Menu</h3>
+  <%= link_to 'All Tasks', tasks_path %><br>
+  <%= link_to 'Logout', logout_path, method: :delete %>
 <% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to the tasks</h1>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %><br>
-      <%= link_to 'Login', login_path, class: 'btn btn-lg btn-primary' %>
-    </div>
-  </div>
+  <h1>Welcome to the Tasklist</h1>
+  <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %><br>
+  <%= link_to 'Login', login_path, class: 'btn btn-lg btn-primary' %>
 <% end %>
