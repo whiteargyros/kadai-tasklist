@@ -1,8 +1,14 @@
-<h1>id: <%= @task.id %> のタスク詳細ページ</h1>
+<% if current_user == @task.user %>
+  <h1>id: <%= @task.id %></h1>
 
-<p>タスク： <%= @task.content %></p>
-<p>ステータス： <%= @task.status %></p>
+  <p>task： <%= @task.content %></p>
+  <p>status： <%= @task.status %></p>
 
-<%= link_to '一覧に戻る', tasks_path %>
-<%= link_to 'このタスクを編集する', edit_task_path(@task) %>
-<%= link_to 'このタスクを削除する', @task, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+  <%= link_to 'Tasklist', root_path %><br>
+  <%= link_to 'Edit', edit_task_path(@task) %><br>
+  <%= link_to 'delete', @task, method: :delete, data: { confirm: 'You sure?' } %>
+  
+<% else %>
+  unable to show task<br>
+  <%= link_to 'Tasklist', root_path %>  
+<% end %>

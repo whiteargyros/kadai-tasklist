@@ -1,10 +1,9 @@
 <% if logged_in? %>
   <h3>PostTask</h3>
   <%= render 'tasks/form', task: @task %>
-  <h3>MyTasklist</h3>
+  <h3>Tasklist</h3>
   <%= render 'tasks/tasks', tasks: @tasks %>
   <h3>Menu</h3>
-  <%= link_to 'All Tasks', tasks_path %><br>
   <%= link_to 'Logout', logout_path, method: :delete %>
 <% else %>
   <h1>Welcome to the Tasklist</h1>

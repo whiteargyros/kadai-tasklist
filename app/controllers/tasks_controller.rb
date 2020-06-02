@@ -3,14 +3,19 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @tasks = Task.order(:id).page(params[:page])
+    redirect_back(fallback_location: root_path)
+#    @tasks = Task.order(:id).page(params[:page])
   end
 
   def show
+    if 
+      current_user != @task.user
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def new
-    @task = Task.new
+    redirect_back(fallback_location: root_path)
   end
 
   def create
@@ -26,6 +31,10 @@ class TasksController < ApplicationController
   end
 
   def edit
+    if 
+      current_user != @task.user
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def update
@@ -41,7 +50,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
 
-    flash[:success] = 'Task は正常に削除されました'
+    flash[:success] = 'Task destroyed'
     redirect_back(fallback_location: root_path)
   end
   
